@@ -4,6 +4,7 @@ import React, { useState } from "react";
 export const FormInput = (props) =>{
 
 
+  const inputRef = useRef(props.nome)
   const {label, msngerro, onChange, id,customErr,  ...inputProps} = props;
 
 
@@ -17,7 +18,7 @@ export const FormInput = (props) =>{
         <div className="input-group mb-3">
           <input
             className="form-control input"
-            {...inputProps} onChange={onChange} customErr={msngerro}
+            {...inputProps} onChange={onChange} customErr={msngerro} id={props.nome} ref={inputRef} 
           />
           <div className="invalid-feedback">
           {props.msngerro}
