@@ -1,0 +1,274 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
+  background-color: #adb5bd ;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.buttonrow{
+  display: flex;
+  justify-content: left;
+  align-content: center;
+  text-align: center;
+}
+
+.labelInput{
+float: left;
+font-family: 'Roboto';
+font-size: 14px;
+    
+    
+}
+
+.formtela1{
+  width: 50%;
+}
+.doisForms{
+  display: flex;
+}
+
+.checkboxmark{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+}
+
+.rowCheckbox{
+    margin: 4px 8px;
+}
+.addHeader{
+    display: flex;
+    align-content: center;
+    width: 100%;
+    background-color: rgb(71, 92, 130);
+    color: aliceblue;
+    text-decoration: solid;
+}
+.addHeader h4{
+    float: left;
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+
+.labelInput{
+float: left;
+font-family: 'Roboto';
+font-size: 14px;
+    
+    
+}
+
+.labelCheckMark{
+    width: 500px;
+}
+
+.checkboxmark{
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+}
+.checkboxmark2{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.rowCheckbox{
+    margin: 4px 8px;
+}
+.rowCheckbox2{
+    margin: 4px 9px;
+}
+.rowCheckboxPermissions{
+  
+}
+.checkLabel{
+    float: left;
+}
+.inputPos{
+    float: left;
+}
+.addHeader{
+    display: flex;
+    align-content: center;
+    width: 100%;
+    background-color: rgb(71, 92, 130);
+    color: aliceblue;
+    text-decoration: solid;
+}
+.addHeader h4{
+    float: left;
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+
+.navbarHeader{
+  width: 50%;
+  background-color: #AFD923;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  font-family: 'Roboto', sans-serif;
+  
+  font-size: 24px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0 ,0.06);
+}
+.brandImg{
+  max-height: 32px;
+  padding-right: 0.25rem;
+}
+.left{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.right{
+  margin-right: 0px;
+  float: right;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+ 
+
+}
+.conteudotab{
+  height: calc(100vh - 42px);
+  border: .02px;
+  border-style: groove;
+}
+.listHead{
+  display: flex;
+  flex-wrap: wrap;
+}
+.buttonAdd{
+  
+    border: 1px solid;
+    border-radius: 0.25rem;
+    background-clip:content-box;
+    
+  box-shadow: 4px 4px 4px rgba(0, 0, 0 ,0.08);
+}
+.buttonAdd button{
+    
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  background-color: #93FA7A;
+  float: right;
+  
+  box-shadow: 4px 4px 4px rgba(0, 0, 0 ,0.08);
+}
+.buttonAdd button:hover{
+    background-color: #FC9F28;
+}
+
+
+.lista h2{
+    background-color: #FC9F28;
+    text-align: center;
+    width: 100%;
+    padding: 4px 4px;
+    
+    border-radius: 0.25rem;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0 ,0.09);
+}
+
+.lista{
+    margin-top: 5em;
+}
+.cadastrotela{
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+  max-height: 100vmax;
+  background-color: #d2d2d2;
+}
+.forms{
+  display: flex;
+}
+
+.formcadastro{
+  margin: 16px 8px;
+  border:  1px groove #585555;
+  background-color: #ffffff;
+ 
+}
+
+.formuser{
+  
+  margin: 16px 8px;
+  border:  1px groove #585555;
+  
+  background-color: #ffffff;
+  
+}
+.fomrmain{
+  
+  background-color: #adb5bd ;
+}
+
+.tableHead{
+  text-align: center;
+  justify-content: center;
+  font-family: 'Roboto';
+}
+
+.sectionPesquisaUp{
+  float: left;
+  max-width: 50%;
+  margin:32px 16px;
+  padding: 8px 16px;
+}
+.sectionPesquisaDown{
+  
+  margin:32px 16px;
+  padding: 8px 16px;
+}
+.linkInativo{
+  background-color: #6c757d;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px groove #ffffff;
+}
+.mainbg{
+  background-color: #adb5bd ;
+}
+.navtop{
+  background-color: #adb5bd;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  
+}
+.nav-link{
+  color: #ffffff;
+}
+.btnform{
+
+  margin: 16px 64px;
+}
+
+.btngravar{
+  margin: 16px 0;
+  color: #ffffff;
+  background-color: #6c757d;
+}
+
