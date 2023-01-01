@@ -5,11 +5,7 @@ import axios from 'axios';
 
 export const FormCadastro= (props) => {
 
-  
-  const onChange = (e) =>{
-    setValues({...values, [e.target.name]: e.target.value})
-  };
-  const [values, setValues] = useState(
+  const [valores, setValores] = useState(
     {
       nome: "", 
       telefone: "", 
@@ -21,404 +17,611 @@ export const FormCadastro= (props) => {
       confirmsenha: "" 
     }
   );
+  const onChange = (event) =>{
+   
+    setValores({...valores, [event.target.name]: event.target.value})
+  };
+ 
   
-  const tipoInputs =[
-
-    {
-      id:1,
-      name: "nome",
-      type: "text",
-      label: "Nome *",
-      placeholder: "",
-      pattern: "^[A-Za-z]{3,16}$",
-      classtype:  "form-control",
-      classrow: "col-sm-6",
-      msgnerro: "Mínimo de 3 caracteres, apenas letras.",
-      required: true
-    },  
-    {
-      id:2,
-      name: "nomeSocial",
-      type: "text",
-      label: "Nome Social/Apelido",
-      classtype:  "form-control",
-      classrow: "col-sm-6",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    }, 
-    {
-      id:3,
-      name: "rg",
-      type: "text",
-      label: "RG *",
-      classtype:  "form-control",
-      classrow: "col-sm-3",
-      placeholder: "",
-      pattern: "^\d{1,2}).?(\d{3}).?(\d{3})-?(\d{1}|X|x$",
-      msgnerro: 'Digite um RG VÁLIDO. Apenas números.',
-      required: true
-    },
-    {
-      id:4,
-      name: "cpf",
-      type: "text",
-      label: "CPF *",
-      classtype:  "form-control",
-      classrow: "col-sm-3",
-      pattern: "^\d{3}).?(\d{3}).?(\d{3})-?(\d{2}$",
-      placeholder: "",
-      msgnerro: 'Digite no mínimo 11 números(sem letras), com ou sem os pontos e hífens!',
-      required: true
-    },
-    {
-      id:5,
-      name: "emissor",
-      type: "text",
-      label: "Emissor",
-      classtype:  "form-control",
-      classrow: "col-sm-3",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:6,
-      name: "uf",
-      type: "select",
-      label: "UF",
-      classtype:  "form-control",
-      classrow: "col-sm-1 form-check",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:7,
-      name: "dataemissor",
-      type: "date",
-      label: "Data de Emissão",
-      classtype:  "form-control",
-      classrow: "col-sm-2",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:8,
-      name: "cargo",
-      type: "select",
-      label: "Cargo",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:9,
-      name: "empresa",
-      type: "text",
-      label: "Empresa",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:10,
-      name: "vinculo",
-      type: "text",
-      label: "Vínculo",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:11,
-      name: "cns",
-      type: "text",
-      label: "CNS",
-      classtype:  "form-control",
-      classrow: "col-sm-5",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    },
-    {
-      id:12,
-      name: "telefone",
-      type: "tel",
-      label: "Telefone *",
-      classtype:  "form-control",
-      classrow: "col-sm-3",
-      pattern: "\(\d{2}\)\s*\d{5}-\d{4}",
-     
-      placeholder: "",
-      msgnerro: 'Digite apenas números, com o DDD, no mínimo 11.',
-      required: true
-    },
-    {
-      id:13,
-      name: "email",
-      type: "email",
-      label: "Email *",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      msgnerro: 'Digite um e-mail válido.',
-      required: true
-    },
-    {
-      id:15,
-      name: "pacienterel",
-      type: "text",
-      label: "Paciente Relacionado",
-      classtype:  "form-control",
-      classrow: "col-sm-12",
-      placeholder: "",
-      msgnerro: '',
-      required: false
-    }
-    ];
-
-  const tipoInputsUser =[
-    
-    {
-      id:1,
-      name: "user",
-      type: "checkbox",
-      label: "Usuário?",
-      classtype:  "form-check",
-      classrow: "col-sm-12",
-      placeholder: "",
-      msgnerro: "",
-      required: false
-    },  
-    {
-      id:2,
-      name: "delegation",
-      type: "checkbox",
-      classtype:  "form-check",
-      classrow: "col-sm-2",
-      label: "Permissão para delegar Poder?",
-      placeholder: "",
-      required: false
-    },  
-    {
-      id:3,
-      name: "subscriber",
-      type: "checkbox",
-      classtype:  "form-check",
-      classrow: "col-sm-10",
-      label: "Permissão de Assinatura?",
-      required: false
-    },  
-    {
-      id:4,
-      name: "Login",
-      type: "text",
-      label: "Login *",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      pattern: "^{4,15}$",
-      msgnerro: "Mínimo de 4 caracteres",
-      required: true
-    },  
-    {
-      id:5,
-      name: "senha",
-      type: "password",
-      label: "Senha *",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,12}$",
-      msgnerro: "A senha deve conter entre 6 a 12 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos.'",
-      required: true
-    },     {
-      id:6,
-      name: "confirmsenha",
-      type: "password",
-      label: "Confirme a Senha *",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      pattern: values.senha,
-      msgnerro: "Mínimo de 3 caracteres, apenas letras",
-      required: true
-    },   {
-      id:8,
-      name: "conselho",
-      type: "select",
-      label: "Conselho",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "Selecione",
-      required: false
-    },  {
-      id:9,
-      name: "ufconselho",
-      type: "select",
-      label: "UF",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "Selecione",
-      required: false
-    },  {
-      id:10,
-      name: "numeroconselho",
-      type: "text",
-      label: "Número ",
-      classtype:  "form-control",
-      classrow: "col-sm-4",
-      placeholder: "",
-      pattern: "/^\d*$/",
-      required: false
-    }, {
-      id:11,
-      name: "certidigital",
-      type: "checkbox",
-      classtype:  "form-check",
-      classrow: "col-sm-2",
-      label: "Login exclusivo com Certificado Digital?",
-      placeholder: "",
-      required: false
-    },{
-      id:12,
-      name: "passreset",
-      type: "checkbox",
-      classtype:  "form-check",
-      classrow: "col-sm-10",
-      label: "Resetar a senha no próximo Acesso?",
-      placeholder: "",
-      required: false
-    },{
-      id:13,
-      name: "estudante",
-      type: "checkbox",
-      label: "Estudante?",
-      classtype:  "form-check",
-      classrow: "col-sm-3",
-      placeholder: "",
-      required: false
-    },{
-      id:14,
-      name: "preceptor",
-      type: "checkbox",
-      label: "Preceptor?",
-      classtype:  "form-check",
-      classrow: "col-sm-3",
-      placeholder: "",
-      required: false
-    },{
-      id:15,
-      name: "toten",
-      type: "checkbox",
-      label: "Acesso ao toten?",
-      classtype:  "form-check",
-      classrow: "col-sm-3",
-      placeholder: "",
-      required: false
-    },{
-      id:16,
-      name: "admincheck",
-      type: "checkbox",
-      label: "Admnistrador?",
-      classtype:  "form-check",
-      classrow: "col-sm-12",
-      placeholder: "",
-      required: false
-    },
-  ];
-
-  const [nome, setNome] =useState();
-  const [telefone, setTelefone] = useState();
-  const [rg, setRg] = useState();
-  const [cpf, setCpf] = useState();
-  const [email, setEmail] = useState();
-  const [login, setLogin] = useState();
-  const [senha, setSenha] = useState();
-
-  
-
   const nomeRef = useRef();
+  const telefoneRef = useRef();
+  const rgRef = useRef();
+  const cpfRef = useRef();
+  const emailRef = useRef();
+  const loginRef = useRef();
+  const senhaRef = useRef();
 
+  
+  function mascaraNome(e){
+    e.target.value = e.target.value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, '')
+    
+  };
+  function mascaraRg(e){
+    e.target.value = e.target.value.replace(/\D/g, '')
+    .replace(/(\d{1,2})(\d{3})(\d{3})(\d{1})$/,"$1.$2.$3-$4")
+  };
+  function mascaraCpf(e){
+    e.target.value = e.target.value.replace(/\D/g, '')
+    .replace(/(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")
+  };
+  function mascaraTel(e) {
+      e.target.value = e.target.value.replace(/\D/g, '')
+      .replace(/(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d{4})/, '$1-$2')
+  };
+  function mascaraEmail(e){
+    e.target.value = e.target.value.replace(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+  }
+  function mascaraLogin(e){
+    e.target.value = e.target.value.replace()
+  }
+  function mascaraSenha(e){
+    e.target.value =e.target.value.replace()
+  }
+ 
+
+  useEffect(() => {
+  
+    if(nomeRef && nomeRef.current){
+      nomeRef.current.addEventListener('input', mascaraNome, false);
+    }
+    if (telefoneRef && telefoneRef.current) {
+  
+        telefoneRef.current.addEventListener('input', mascaraTel, false);
+    }
+    if(rgRef && rgRef.current){
+      rgRef.current.addEventListener('input', mascaraRg, false );
+    }
+    if(cpfRef && cpfRef.current){
+      cpfRef.current.addEventListener('input', mascaraCpf, false);
+    }
+    if(emailRef && emailRef.current){
+      emailRef.current.addEventListener('input', mascaraEmail, false);
+    }
+    if(loginRef && loginRef.current){
+      loginRef.current.addEventListener('input', mascaraLogin, false);
+    }
+    if(senhaRef && senhaRef.current){
+      senhaRef.current.addEventListener('input', mascaraSenha, false);
+    }
+    
+  }, [valores]);
+  
 
   const addNewUser = (e) => {
     e.preventDefault();
-    props.addHandler(values)
+    props.addHandler(valores)
   };
 
   const tester = (e) =>{
     e.preventDefault();
-    addNewUser(values);
-    console.log(values)
+    addNewUser(valores);
+    console.log(valores)
   };
   
-
   return (
   
     <div className="container-fluid mainbg">
       
       <form onSubmit={addNewUser} className='formmain card needs-validation' noValidate>
-        <div className="container-fluid doisForms">
-          <div className="formtela1 card-body">
-            <header className="addHeader card-title">
-              <h4>Dados de Funcionário</h4>
-            </header>
-
-            <div className="container-fluid formtela card">
-              <div className="container-fluid formtela">
-                <div className="row">
-                  {tipoInputs.map((input) => (
-                  <div className={input.classrow} key={input.id}>
-                  <FormInput key={input.id} {...input} value = {values[input.name]} onChange={onChange} 
-                  className={input.classtype} id={values[input.name]} /></div>
-            ))}
-            </div>
-            </div>
-            </div>
-      </div>
-       
-        <div className="formtela1 container-fluid card-body">
-            <header className="addHeader card-title">
-              <h4>Dados de Usuário</h4>
-            </header>
-
-            <div className="container-fluid formtela card">
-              <div className="container-fluid formtela">
-              
-                <div className="row">
-                 {tipoInputsUser.map((input) =>(
-                  <div className={input.classrow}   key={input.id}>
-                  <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}  className={input.classtype} />
+      <div className="container-fluid doisForms">
+      <div className="formtela1 card-body">
+              <header className="addHeader card-title">
+                <h4>Dados de Funcionário</h4>
+              </header>
+                <div className="container-fluid formtela card">
+                  <div className="container-fluid formtela">
+                  <div className="row">
+                  <div className="form-group mb-3">
+                      <label htmlFor="nome" className="labelInput">
+                        Nome *
+                      </label>
+                      <div className="input-group ">
+                        <input
+                          className="form-control input"
+                          type="text" placeholder="" required minLength="3" pattern='^[a-zA-Z]+$'  
+                          title='Mínimo de 3 caracteres, apenas letras' id='nome' name='nome' 
+                          ref={nomeRef}
+                          value={valores.nome || ''} 
+                          onChange={onChange}
+                        />
+                        <div className='invalid-feedback'>
+                        Favor inserir o Nome com apenas Letras.
+                        </div>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="funcNSocial" className="labelInput">
+                        Nome Social / Apelido
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          name="funcNSocial"
+                          id="funcNSocial"
+                          className="form-control"
+                        
+                          placeholder=""
+                        />
+                      </div>
+                    </div>
                   </div>
-                 ))}
-                
-              </div>
+                  <div className="row">
+                    <div className="col-sm-3 form-group">
+                      <label htmlFor="rg" className="labelInput">
+                        RG *
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          name="rg"
+                          className="form-control" required minLength='9' maxLength='12' 
+                          pattern='(^\d{1,2}).?(\d{3}).?(\d{3})-?(\d{1}|X|x$)'
+                          title='Digite um RG VÁLIDO. Apenas números.'
+                          ref={rgRef}
+                          id='rg' value={valores.rg || ''} onChange={onChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-3 form-group">
+                      <label htmlFor="cpf" className="labelInput">
+                        CPF *
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          name="cpf"
+                          id="cpf"
+                          className="form-control" required minLength="11" maxLength="15" 
+                          pattern='(^\d{3}).?(\d{3}).?(\d{3})-?(\d{2}$)'
+                          title='Digite no mínimo 11 números(sem letras), com ou sem os pontos e hífens!'
+                          ref={cpfRef}
+                          value={valores.cpf || ''} onChange={onChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-3 form-group">
+                      <label htmlFor="funcEmissor" className="labelInput">
+                        Emissor
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          name="funcEmissor"
+                          id="funcEmissor"
+                          className="form-control"
+                    
+                          placeholder=""
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-1 form-group">
+                      <label htmlFor="funcEmissorUF" className="labelInput">
+                        UF
+                      </label>
+                      <div className="input-group mb-3">
+                        <select
+                          id="funcEmissorUF"
+                          placeholder="-"
+                          name="funcEmissorUF"
+                          className="form-control"
+                        >
+                          <option></option>
+                          <option value="BA">BA</option>
+                          <option value="SP">SP</option>
+                          <option value="RE">RE</option>
+                          <option value="MG">MG</option>
+                          <option value="PE">PE</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-sm-2 form-group">
+                      <label htmlFor="funcDateEmit" className="labelInput">
+                        Data de Emissão
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          type="date"
+                          placeholder=""
+                          id="funcDateEmit"
+                          className="form-control"
+                          name="funcDateEmit"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-4 my-1 form-group">
+                      <label htmlFor="funcCargo">Cargo *</label>
+                      <div className="input-group mb-3">
+                        <select
+                          id="funcCargo"
+                          className="form-control"
+                          placeholder="Selecione"
+                          name="funcCargo"
+                        >
+                          <option></option>
+                          <option value="Estudante">Estudante</option>
+                          <option value="Administrador">Administrador</option>
+                          <option value="Técnico">Técnico</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-sm-4 my-1 form-group">
+                      <label htmlFor="funcEmpresa">Empresa *</label>
+                      <div className="input-group mb-3">
+                        <select
+                          id="funcEmpresa"
+                          className="form-control"
+                          placeholder="Selecione"
+                          name="funcEmpresa"
+                        >
+                          <option></option>
+                          <option value="SUS">SUS</option>
+                          <option value="SMED">SMED</option>
+                          <option value="Outro">Outro</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="col-sm-4 my-1 form-group">
+                      <label htmlFor="funcVinculo">Vínculo *</label>
+                      <div className="input-group mb-3">
+                        <select
+                          id="funcVinculo"
+                          className="form-control"
+                          placeholder="Selecione"
+                          name="funcVinculo"
+                        >
+                          <option></option>
+                          <option value="Estágio">Estágio</option>
+                          <option value="CTPS">CTPS</option>
+                          <option value="PJ">PJ</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-5 my-1 form-group">
+                      <label htmlFor="funcCNS" className="labelInput">
+                        CNS
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          className="form-control"
+                          id="funcCNS"
+                          name="funcCNS"
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-3 my-1 form-group">
+                      <label htmlFor="telefone" className="labelInput">
+                        Telefone *
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          className="form-control"
+                          id="telefone"
+                          name="telefone" required minLength='11' maxLength='15'
+                          /* pattern='(^[0-9]{2})?(\s|-)?(9?[0-9]{4})-?([0-9]{4}$)' */
+                          title='Digite apenas números, com o DDD, no mínimo 11.' 
+                          ref={telefoneRef}
+                          value={valores.telefone || ''} onChange={onChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm-4 my-1 form-group">
+                      <label htmlFor="funcEmail" className="labelInput">
+                        E-mail *
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          id='email'
+                          name='email'
+                          className="form-control"
+                          type="email"  required 
+                          title='Digite um e-mail válido.'
+                          ref={emailRef}
+                          value={valores.email || ''} onChange={onChange}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-12 my-1 form-group">
+                      <label htmlFor="formInputPaciente" className="labelInput">
+                        Paciente Relacionado
+                      </label>
+                      <div className="input-group mb-3">
+                        <input
+                          id="formInputPaciente"
+                          name="formInputPaciente"
+                          className="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div className="footer card btnform fixed-bottom card-body">
-          <div className='container-fluid buttonrow'>
-          <button
-            type="submit"
-            className="btn btngravar mb-3"
-          > Gravar </button>
-      
-          </div>
+            <div className="formtela1 card-body">
+                <header className="addHeader card-title">
+                  <h4>Dados de Usuário</h4>
+                </header>
+                <div className="container-fluid formtela card">
+                  <div className="container-fluid formtela">
+                    <div className="row">
+                      <div className="col-sm-1 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcUserCheck"
+                            className="labelInput"
+                            title="Usuário?"
+                          >
+                            Usuário?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcUserCheck"
+                              id="funcUserCheck"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-2 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcPowerCheck"
+                            className="labelInput"
+                            title="Permissão para delegar Poder?"
+                          >
+                            Permissão para delegar Poder?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcPowerCheck"
+                              id="funcPowerCheck"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-10 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcSubscribe"
+                            className="labelInput"
+                            title="Permissão de Assinatura?"
+                          >
+                            Permissão de Assinatura?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcSubscribe"
+                              id="funcSubscribe"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="login" className="labelInput">
+                          Login *
+                        </label>
+                        <div className="input-group mb-3">
+                          <input
+                            name="login"
+                            id="login"
+                            className="form-control" required
+                            type="text" minLength='5' maxLength='16'
+                            title='Digite o login, entre 3 e 15 caracteres com letras, números, underline e traço'
+                            ref={loginRef}
+                            value={valores.login || ''} onChange={onChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="senha" className="labelInput">
+                          Senha *
+                        </label>
+                        <div className="input-group mb-3">
+                          <input
+                            name="senha"
+                            id="senha"
+                            className="form-control"
+                            type="password" required minLength='6'
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?!.*[ !@#$%^&*_=+-]).{6,12}$"
+                            title='A senha deve conter entre 6 a 12 caracteres, deve conter pelo menos uma letra maiúscula, um número e não deve conter símbolos.'
+                            ref={senhaRef}
+                            value={valores.senha || ''} onChange={onChange}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="funcPassword" className="labelInput">
+                          Confirme a Senha
+                        </label>
+                        <div className="input-group mb-3">
+                          <input
+                            name="funcPassword"
+                            id="funcPassword"
+                            className="form-control"
+                            type="password"
+                            placeholder=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="funcConselho">Conselho *</label>
+                        <div className="input-group mb-3">
+                          <select
+                            id="funcConselho"
+                            className="form-control"
+                            placeholder="Selecione"
+                            name="funcConselho"
+                          >
+                            <option></option>
+                            <option value="Estudante">Estudante</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Técnico">Técnico</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="funcConselhoUF">UF *</label>
+                        <div className="input-group mb-3">
+                          <select
+                            id="funcConselhoUF"
+                            className="form-control"
+                            placeholder="Selecione"
+                            name="funcConselhoUF"
+                          >
+                            <option></option>
+                            <option value="SUS">SUS</option>
+                            <option value="SMED">SMED</option>
+                            <option value="Outro">Outro</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <label htmlFor="funcConselhoNumber">Número</label>
+                        <div className="input-group mb-3">
+                          <input
+                            id="funcConselhoNumber"
+                            className="form-control"
+                            type="number"
+                            name="funcConselhoNumber"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-2 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcDigitalCert"
+                            className="labelInput"
+                            title="Login exclusivo com Certificado Digital?"
+                          >
+                            Login exclusivo com Certificado Digital?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcDigitalCert"
+                              id="funcDigitalCert"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-10 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcPasswordReset"
+                            className="labelInput"
+                            title="Permissão de Assinatura?"
+                          >
+                            Alterar senha no próximo acesso?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcPasswordReset"
+                              id="funcPasswordReset"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-sm-4 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcEstudante"
+                            className="labelInput"
+                            title="Estudante?"
+                          >
+                            Estudante?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcEstudante"
+                              id="funcEstudante"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcPreceptor"
+                            className="labelInput"
+                            title="Preceptor?"
+                          >
+                            Preceptor?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcPreceptor"
+                              id="funcPreceptor"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-sm-4 my-1 form-group">
+                        <div className="form-check">
+                          <label
+                            htmlFor="funcToten"
+                            className="labelInput"
+                            title="Acesso ao Toten?"
+                          >
+                            Acesso ao Toten?
+                          </label>
+                          <div className="input-group mb-3">
+                            <input
+                              name="funcToten"
+                              id="funcToten"
+                              className="form-check-input"
+                              type="checkbox"
+                              placeholder=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div className="footer card btnform fixed-bottom card-body">
+              <div className='container-fluid buttonrow'>
+              <button
+                type="submit"
+                className="btn btngravar mb-3"
+              > Gravar </button>
+          
+              </div>
+            
         
-     
+            </div>
       </div>
-          </div>
-
-
-  
       </form>
 
     </div>
